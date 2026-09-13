@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INNOCENT VINUU | Tic Tac Toe</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background:#050509;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.app{
+  width:100%;
+  max-width:430px;
+  min-height:100vh;
+  padding:25px 20px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  text-align:center;
+}
+
+.screen{display:none}
+.screen.active{display:block}
+
+.logo{
+  font-size:38px;
+  font-weight:900;
+  letter-spacing:3px;
+  margin-bottom:8px;
+}
+
+.logo span{
+  color:#00eaff;
+}
+
+.subtitle{
+  color:#777;
+  letter-spacing:4px;
+  font-size:12px;
+  margin-bottom:45px;
+}
+
+button{
+  width:100%;
+  padding:17px;
+  margin:7px 0;
+  border-radius:16px;
+  border:1px solid #292b36;
+  background:#11131a;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.15s;
+}
+
+button:active{
+  transform:scale(.95);
+}
+
+.primary{
+  background:#00dfff;
+  color:#001014;
+  border:0;
+  box-shadow:0 0 25px #00dfff55;
+}
+
+.title{
+  font-size:28px;
+  font-weight:900;
+  margin-bottom:18px;
+}
+
+.score{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  margin-bottom:15px;
+}
+
+.scoreBox{
+  width:100px;
+  padding:12px;
+  border-radius:15px;
+  background:#101218;
+  border:1px solid #272a34;
+}
+
+.scoreBox b{
+  display:block;
+  font-size:25px;
+  margin-top:5px;
+}
+
+.status{
+  color:#aaa;
+  min-height:24px;
+  margin-bottom:8px;
+}
+
+.board{
+  width:min(88vw,360px);
+  aspect-ratio:1;
+  margin:12px auto 20px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+
+.cell{
+  background:#101218;
+  border:1px solid #292c37;
+  border-radius:18px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:54px;
+  font-weight:900;
+  cursor:pointer;
+  transition:.15s;
+}
+
+.cell:active{
+  transform:scale(.92);
+}
+
+.cell.x{
+  color:#00eaff;
+  text-shadow:0 0 20px #00eaff;
+}
+
+.cell.o{
+  color:#ff3bea;
+  text-shadow:0 0 20px #ff3bea;
+}
+
+.cell.win{
+  animation:win .7s infinite alternate;
+  border-color:#fff;
+}
+
+@keyframes win{
+  from{transform:scale(1)}
+  to{transform:scale(1.05)}
+}
+
+.about{
+  margin-top:30px;
+  color:#777;
+  line-height:1.8;
+}
+
+.about strong{
+  color:#00eaff;
+  font-size:20px;
+}
+
+.credit{
+  position:fixed;
+  bottom:10px;
+  width:100%;
+  text-align:center;
+  color:#555;
+  font-size:11px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- HOME -->
+<section id="home" class="screen active">
+
+  <div class="logo">
+    TIC <span>TAC</span> TOE
+  </div>
+
+  <div class="subtitle">
+    NEON EDITION
+  </div>
+
+  <button class="primary" onclick="startGame('computer')">
+    🤖 VS COMPUTER
+  </button>
+
+  <button onclick="startGame('player')">
+    👥 2 PLAYER
+  </button>
+
+  <button onclick="show('settings')">
+    ⚙️ SETTINGS
+  </button>
+
+  <div class="about">
+    Developed by<br>
+    <strong>INNOCENT VINUU</strong>
+  </div>
+
+</section>
+
+
+<!-- GAME -->
+<section id="game" class="screen">
+
+  <div class="title">TIC TAC TOE</div>
+
+  <div class="score">
+
+    <div class="scoreBox">
+      ❌ X
+      <b id="xScore">0</b>
+    </div>
+
+    <div class="scoreBox">
+      ⭕ O
+      <b id="oScore">0</b>
+    </div>
+
+  </div>
+
+  <div class="status" id="status">
+    X's Turn
+  </div>
+
+  <div class="board" id="board"></div>
+
+  <button class="primary" onclick="resetRound()">
+    🔄 REMATCH
+  </button>
+
+  <button onclick="show('home')">
+    🏠 HOME
+  </button>
+
+</section>
+
+
+<!-- SETTINGS -->
+<section id="settings" class="screen">
+
+  <div class="title">SETTINGS</div>
+
+  <button id="soundButton" onclick="toggleSound()">
+    🔊 SOUND: ON
+  </button>
+
+  <button id="vibrationButton" onclick="toggleVibration()">
+    📳 VIBRATION: ON
+  </button>
+
+  <button onclick="show('home')">
+    ← BACK
+  </button>
+
+  <div class="about">
+    <strong>INNOCENT VINUU</strong><br>
+    Professional Tic Tac Toe
+  </div>
+
+</section>
+
+</div>
+
+<div class="credit">
+Developed by INNOCENT VINUU
+</div>
+
+
+<script>
+
+let cells = [];
+let current = "X";
+let mode = "computer";
+let gameOver = false;
+
+let xScore = 0;
+let oScore = 0;
+
+let sound = true;
+let vibration = true;
+
+
+/* SCREEN */
+
+function show(id){
+
+  document.querySelectorAll(".screen")
+  .forEach(s => s.classList.remove("active"));
+
+  document.getElementById(id)
+  .classList.add("active");
+}
+
+
+/* START */
+
+function startGame(selectedMode){
+
+  mode = selectedMode;
+
+  xScore = 0;
+  oScore = 0;
+
+  updateScore();
+
+  show("game");
+
+  resetRound();
+}
+
+
+/* RESET */
+
+function resetRound(){
+
+  cells = [
+    "","","",
+    "","","",
+    "","",""
+  ];
+
+  current = "X";
+  gameOver = false;
+
+  document.getElementById("status")
+  .textContent = "X's Turn";
+
+  draw();
+}
+
+
+/* DRAW */
+
+function draw(){
+
+  const board =
+    document.getElementById("board");
+
+  board.innerHTML = "";
+
+  cells.forEach((value,index)=>{
+
+    const cell =
+      document.createElement("div");
+
+    cell.className = "cell";
+
+    if(value){
+
+      cell.textContent = value;
+
+      cell.classList.add(
+        value.toLowerCase()
+      );
+    }
+
+    cell.onclick = () => play(index);
+
+    board.appendChild(cell);
+
+  });
+}
+
+
+/* PLAY */
+
+function play(index){
+
+  if(gameOver || cells[index]) return;
+
+  cells[index] = current;
+
+  tapSound();
+
+  if(vibration && navigator.vibrate){
+    navigator.vibrate(30);
+  }
+
+  draw();
+
+  const winner = checkWinner();
+
+  if(winner){
+
+    gameOver = true;
+
+    if(winner === "X"){
+      xScore++;
+    }else{
+      oScore++;
+    }
+
+    updateScore();
+
+    document.getElementById("status")
+      .textContent =
+      winner + " WINS! 🏆";
+
+    winSound();
+
+    highlightWinner();
+
+    return;
+  }
+
+  if(!cells.includes("")){
+
+    gameOver = true;
+
+    document.getElementById("status")
+      .textContent =
+      "DRAW! 🤝";
+
+    return;
+  }
+
+  current =
+    current === "X" ? "O" : "X";
+
+  document.getElementById("status")
+    .textContent =
+    current + "'s Turn";
+
+  if(
+    mode === "computer" &&
+    current === "O"
+  ){
+
+    setTimeout(computerMove,400);
+  }
+}
+
+
+/* COMPUTER */
+
+function computerMove(){
+
+  if(gameOver) return;
+
+  let empty = [];
+
+  cells.forEach((v,i)=>{
+    if(v === "") empty.push(i);
+  });
+
+  if(empty.length === 0) return;
+
+
+  /* WIN */
+
+  for(let i of empty){
+
+    cells[i] = "O";
+
+    if(checkWinner() === "O"){
+
+      cells[i] = "";
+
+      play(i);
+
+      return;
+    }
+
+    cells[i] = "";
+  }
+
+
+  /* BLOCK */
+
+  for(let i of empty){
+
+    cells[i] = "X";
+
+    if(checkWinner() === "X"){
+
+      cells[i] = "";
+
+      cells[i] = "O";
+
+      tapSound();
+
+      draw();
+
+      current = "X";
+
+      document.getElementById("status")
+        .textContent =
+        "X's Turn";
+
+      return;
+    }
+
+    cells[i] = "";
+  }
+
+
+  /* CENTER */
+
+  if(cells[4] === ""){
+
+    play(4);
+
+    return;
+  }
+
+
+  /* RANDOM */
+
+  const move =
+    empty[
+      Math.floor(
+        Math.random()*empty.length
+      )
+    ];
+
+  play(move);
+}
+
+
+/* WINNER */
+
+function checkWinner(){
+
+  const combinations = [
+
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+
+    [0,4,8],
+    [2,4,6]
+
+  ];
+
+  for(let combo of combinations){
+
+    const [a,b,c] = combo;
+
+    if(
+      cells[a] &&
+      cells[a] === cells[b] &&
+      cells[a] === cells[c]
+    ){
+
+      return cells[a];
+    }
+  }
+
+  return null;
+}
+
+
+/* WIN HIGHLIGHT */
+
+function highlightWinner(){
+
+  const combinations = [
+
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6]
+
+  ];
+
+  for(let combo of combinations){
+
+    const [a,b,c] = combo;
+
+    if(
+      cells[a] &&
+      cells[a] === cells[b] &&
+      cells[a] === cells[c]
+    ){
+
+      const board =
+        document.querySelectorAll(".cell");
+
+      board[a].classList.add("win");
+      board[b].classList.add("win");
+      board[c].classList.add("win");
+
+      break;
+    }
+  }
+}
+
+
+/* SCORE */
+
+function updateScore(){
+
+  document.getElementById("xScore")
+    .textContent = xScore;
+
+  document.getElementById("oScore")
+    .textContent = oScore;
+}
+
+
+/* SOUND */
+
+function toggleSound(){
+
+  sound = !sound;
+
+  document.getElementById("soundButton")
+    .textContent =
+    sound
+    ? "🔊 SOUND: ON"
+    : "🔇 SOUND: OFF";
+}
+
+
+function toggleVibration(){
+
+  vibration = !vibration;
+
+  document.getElementById("vibrationButton")
+    .textContent =
+    vibration
+    ? "📳 VIBRATION: ON"
+    : "📴 VIBRATION: OFF";
+}
+
+
+/* SIMPLE SOUND ENGINE */
+
+let audioContext;
+
+function beep(frequency,duration){
+
+  if(!sound) return;
+
+  try{
+
+    audioContext =
+      audioContext ||
+      new (
+        window.AudioContext ||
+        window.webkitAudioContext
+      )();
+
+    const oscillator =
+      audioContext.createOscillator();
+
+    const gain =
+      audioContext.createGain();
+
+    oscillator.frequency.value =
+      frequency;
+
+    oscillator.type = "sine";
+
+    gain.gain.setValueAtTime(
+      0.08,
+      audioContext.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      0.001,
+      audioContext.currentTime + duration
+    );
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    oscillator.start();
+
+    oscillator.stop(
+      audioContext.currentTime + duration
+    );
+
+  }catch(e){}
+}
+
+
+function tapSound(){
+
+  beep(520,0.08);
+}
+
+
+function winSound(){
+
+  beep(660,0.12);
+
+  setTimeout(()=>{
+    beep(880,0.15);
+  },120);
+
+  setTimeout(()=>{
+    beep(1040,0.2);
+  },260);
+}
+
+</script>
+
+</body>
+  </html>

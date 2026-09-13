@@ -2,10 +2,27 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>INNOCENT VINUU | Tic Tac Toe</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#050509">
+
+<meta name="description"
+content="Tic Tac Toe by INNOCENT VINUU™. Play online against computer or with a friend.">
+
+<!-- WEBSITE LOGO / FAVICON -->
+<link rel="icon" type="image/svg+xml"
+href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23050509'/%3E%3Crect x='15' y='15' width='70' height='70' rx='15' fill='none' stroke='%2300eaff' stroke-width='7'/%3E%3Cpath d='M38 32L62 56M62 32L38 56' stroke='%2300eaff' stroke-width='7' stroke-linecap='round'/%3E%3Ccircle cx='65' cy='67' r='10' fill='none' stroke='%23ff3bea' stroke-width='6'/%3E%3C/svg%3E">
+
+<title>INNOCENT VINUU™ | Tic Tac Toe</title>
 
 <style>
+
+/* =========================
+   RESET
+========================= */
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -13,50 +30,139 @@
   font-family:Arial,sans-serif;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   min-height:100vh;
-  background:#050509;
+  background:
+    radial-gradient(circle at top,#101b35 0%,#050509 45%,#020204 100%);
   color:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
 }
+
+/* =========================
+   APP
+========================= */
 
 .app{
   width:100%;
   max-width:430px;
   min-height:100vh;
-  padding:25px 20px;
+  margin:auto;
+  padding:18px 18px 80px;
+}
+
+.screen{
+  display:none;
+}
+
+.screen.active{
+  display:block;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.brand{
   display:flex;
-  flex-direction:column;
   justify-content:center;
-  text-align:center;
+  align-items:center;
+  gap:10px;
+  margin-bottom:18px;
 }
 
-.screen{display:none}
-.screen.active{display:block}
-
-.logo{
-  font-size:38px;
+.logoIcon{
+  width:52px;
+  height:52px;
+  border:3px solid #00eaff;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
   font-weight:900;
-  letter-spacing:3px;
-  margin-bottom:8px;
+  color:#00eaff;
+  box-shadow:
+    0 0 12px #00eaff,
+    inset 0 0 12px #00eaff33;
 }
 
-.logo span{
+.brandText{
+  text-align:left;
+}
+
+.brandName{
+  font-size:19px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.brandName span{
   color:#00eaff;
 }
 
-.subtitle{
+.brandSmall{
   color:#777;
-  letter-spacing:4px;
-  font-size:12px;
-  margin-bottom:45px;
+  font-size:9px;
+  letter-spacing:2px;
+  margin-top:3px;
 }
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  text-align:center;
+  padding:25px 0 15px;
+}
+
+.hero h1{
+  font-size:42px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:2px;
+  text-shadow:0 0 20px #00eaff55;
+}
+
+.hero h1 span{
+  color:#00eaff;
+}
+
+.heroSub{
+  margin-top:13px;
+  color:#aaa;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.heroLogo{
+  width:105px;
+  height:105px;
+  margin:0 auto 20px;
+  border-radius:28px;
+  border:4px solid #00eaff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:47px;
+  font-weight:900;
+  color:#00eaff;
+  background:#090d16;
+  box-shadow:
+    0 0 20px #00eaff88,
+    0 0 55px #00eaff22;
+}
+
+/* =========================
+   BUTTONS
+========================= */
 
 button{
   width:100%;
-  padding:17px;
+  padding:16px;
   margin:7px 0;
   border-radius:16px;
   border:1px solid #292b36;
@@ -79,10 +185,131 @@ button:active{
   box-shadow:0 0 25px #00dfff55;
 }
 
+.secondary{
+  background:#151923;
+}
+
+/* =========================
+   DEVELOPER
+========================= */
+
+.developer{
+  margin:25px 0;
+  padding:18px;
+  border-radius:20px;
+  background:linear-gradient(
+    135deg,
+    #0e1421,
+    #090b12
+  );
+  border:1px solid #202735;
+  text-align:center;
+}
+
+.developer small{
+  color:#777;
+  display:block;
+  margin-bottom:6px;
+}
+
+.developer strong{
+  color:#00eaff;
+  font-size:20px;
+  letter-spacing:1px;
+}
+
+/* =========================
+   GAME PREVIEW
+========================= */
+
+.preview{
+  margin:25px 0;
+  padding:16px;
+  border-radius:24px;
+  background:#0b0e16;
+  border:1px solid #242936;
+  box-shadow:0 10px 40px #0008;
+}
+
+.previewTitle{
+  text-align:center;
+  font-size:13px;
+  color:#aaa;
+  margin-bottom:13px;
+  letter-spacing:2px;
+}
+
+.previewBoard{
+  width:100%;
+  aspect-ratio:1;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:5px;
+}
+
+.previewCell{
+  background:#111722;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:40px;
+  font-weight:900;
+}
+
+.previewCell:nth-child(1),
+.previewCell:nth-child(5),
+.previewCell:nth-child(9){
+  color:#00eaff;
+  text-shadow:0 0 12px #00eaff;
+}
+
+.previewCell:nth-child(2),
+.previewCell:nth-child(7){
+  color:#ff3bea;
+  text-shadow:0 0 12px #ff3bea;
+}
+
+/* =========================
+   INFO CARDS
+========================= */
+
+.sectionTitle{
+  text-align:center;
+  font-size:24px;
+  font-weight:900;
+  margin:35px 0 15px;
+}
+
+.infoCard{
+  padding:17px;
+  margin:9px 0;
+  border-radius:17px;
+  background:#0d1018;
+  border:1px solid #202530;
+}
+
+.infoCard b{
+  display:block;
+  margin-bottom:6px;
+  color:#00eaff;
+}
+
+.infoCard p{
+  color:#888;
+  font-size:13px;
+  line-height:1.6;
+}
+
+/* =========================
+   GAME
+========================= */
+
 .title{
   font-size:28px;
   font-weight:900;
-  margin-bottom:18px;
+  text-align:center;
+  margin:12px 0 18px;
 }
 
 .score{
@@ -98,6 +325,7 @@ button:active{
   border-radius:15px;
   background:#101218;
   border:1px solid #272a34;
+  text-align:center;
 }
 
 .scoreBox b{
@@ -110,6 +338,7 @@ button:active{
   color:#aaa;
   min-height:24px;
   margin-bottom:8px;
+  text-align:center;
 }
 
 .board{
@@ -158,10 +387,15 @@ button:active{
   to{transform:scale(1.05)}
 }
 
+/* =========================
+   ABOUT
+========================= */
+
 .about{
-  margin-top:30px;
+  margin-top:25px;
   color:#777;
   line-height:1.8;
+  text-align:center;
 }
 
 .about strong{
@@ -169,14 +403,55 @@ button:active{
   font-size:20px;
 }
 
-.credit{
-  position:fixed;
-  bottom:10px;
-  width:100%;
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+  margin-top:45px;
+  padding-top:25px;
+  border-top:1px solid #20232d;
   text-align:center;
+}
+
+.footerLogo{
+  font-size:23px;
+  font-weight:900;
+  letter-spacing:2px;
+  margin-bottom:8px;
+}
+
+.footerLogo span{
+  color:#00eaff;
+}
+
+.footer p{
   color:#555;
   font-size:11px;
+  line-height:1.7;
 }
+
+.footerLinks{
+  margin:15px 0;
+}
+
+.footerLinks span{
+  color:#777;
+  font-size:12px;
+  margin:0 5px;
+}
+
+/* =========================
+   CREDIT
+========================= */
+
+.credit{
+  text-align:center;
+  color:#444;
+  font-size:10px;
+  margin-top:25px;
+}
+
 </style>
 </head>
 
@@ -184,137 +459,434 @@ button:active{
 
 <div class="app">
 
-<!-- HOME -->
+<!-- =========================
+     HOME
+========================= -->
+
 <section id="home" class="screen active">
 
-  <div class="logo">
-    TIC <span>TAC</span> TOE
+  <div class="brand">
+
+    <div class="logoIcon">
+      X O
+    </div>
+
+    <div class="brandText">
+      <div class="brandName">
+        INNOCENT <span>VINUU</span>™
+      </div>
+
+      <div class="brandSmall">
+        ORIGINAL GAME
+      </div>
+    </div>
+
   </div>
 
-  <div class="subtitle">
-    NEON EDITION
+
+  <div class="hero">
+
+    <div class="heroLogo">
+      X<br>O
+    </div>
+
+    <h1>
+      TIC <span>TAC</span> TOE
+    </h1>
+
+    <div class="heroSub">
+      Play • Compete • Enjoy
+      <br>
+      A simple, fast & fun Tic Tac Toe game
+    </div>
+
   </div>
 
-  <button class="primary" onclick="startGame('computer')">
+
+  <button class="primary"
+    onclick="startGame('computer')">
+    ▶️ PLAY NOW
+  </button>
+
+  <button
+    onclick="startGame('computer')">
     🤖 VS COMPUTER
   </button>
 
-  <button onclick="startGame('player')">
+  <button
+    onclick="startGame('player')">
     👥 2 PLAYER
   </button>
 
-  <button onclick="show('settings')">
+  <button
+    onclick="show('settings')">
     ⚙️ SETTINGS
   </button>
 
+
+  <div class="developer">
+
+    <small>DEVELOPER</small>
+
+    <strong>
+      INNOCENT VINUU™
+    </strong>
+
+  </div>
+
+
+  <!-- GAME PREVIEW -->
+
+  <div class="preview">
+
+    <div class="previewTitle">
+      TIC TAC TOE
+    </div>
+
+    <div class="previewBoard">
+
+      <div class="previewCell">X</div>
+      <div class="previewCell">O</div>
+      <div class="previewCell"></div>
+
+      <div class="previewCell"></div>
+      <div class="previewCell">X</div>
+      <div class="previewCell">O</div>
+
+      <div class="previewCell">O</div>
+      <div class="previewCell"></div>
+      <div class="previewCell">X</div>
+
+    </div>
+
+  </div>
+
+
+  <!-- FEATURES -->
+
+  <div class="sectionTitle">
+    GAME FEATURES
+  </div>
+
+  <div class="infoCard">
+
+    <b>🤖 VS COMPUTER</b>
+
+    <p>
+      Challenge the computer and try to become
+      the Tic Tac Toe champion.
+    </p>
+
+  </div>
+
+
+  <div class="infoCard">
+
+    <b>👥 2 PLAYER</b>
+
+    <p>
+      Play with your friend on the same device.
+    </p>
+
+  </div>
+
+
+  <div class="infoCard">
+
+    <b>🏆 SCORE SYSTEM</b>
+
+    <p>
+      Keep playing and track your X and O wins.
+    </p>
+
+  </div>
+
+
+  <div class="infoCard">
+
+    <b>🔊 SOUND & VIBRATION</b>
+
+    <p>
+      Enjoy simple game sounds and vibration feedback.
+    </p>
+
+  </div>
+
+
+  <!-- ABOUT -->
+
+  <div class="sectionTitle">
+    ABOUT THE GAME
+  </div>
+
   <div class="about">
-    Developed by<br>
-    <strong>INNOCENT VINUU</strong>
+
+    Tic Tac Toe is a classic strategy game
+    made for quick and enjoyable matches.
+
+    <br><br>
+
+    Designed and developed by
+
+    <br>
+
+    <strong>
+      INNOCENT VINUU™
+    </strong>
+
+  </div>
+
+
+  <!-- FOOTER -->
+
+  <div class="footer">
+
+    <div class="footerLogo">
+      INNOCENT <span>VINUU</span>™
+    </div>
+
+    <div class="footerLinks">
+      <span>Game</span> |
+      <span>About</span> |
+      <span>Privacy</span>
+    </div>
+
+    <p>
+      © 2026 INNOCENT VINUU™.
+      All Rights Reserved.
+    </p>
+
   </div>
 
 </section>
 
 
-<!-- GAME -->
+<!-- =========================
+     GAME SCREEN
+========================= -->
+
 <section id="game" class="screen">
 
-  <div class="title">TIC TAC TOE</div>
+  <div class="brand">
+
+    <div class="logoIcon">
+      X O
+    </div>
+
+    <div class="brandText">
+
+      <div class="brandName">
+        INNOCENT <span>VINUU</span>™
+      </div>
+
+      <div class="brandSmall">
+        TIC TAC TOE
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="title">
+    TIC TAC TOE
+  </div>
+
 
   <div class="score">
 
     <div class="scoreBox">
+
       ❌ X
-      <b id="xScore">0</b>
+
+      <b id="xScore">
+        0
+      </b>
+
     </div>
 
+
     <div class="scoreBox">
+
       ⭕ O
-      <b id="oScore">0</b>
+
+      <b id="oScore">
+        0
+      </b>
+
     </div>
 
   </div>
+
 
   <div class="status" id="status">
     X's Turn
   </div>
 
-  <div class="board" id="board"></div>
 
-  <button class="primary" onclick="resetRound()">
+  <div
+    class="board"
+    id="board">
+  </div>
+
+
+  <button
+    class="primary"
+    onclick="resetRound()">
     🔄 REMATCH
   </button>
 
-  <button onclick="show('home')">
+
+  <button
+    onclick="show('home')">
     🏠 HOME
   </button>
 
 </section>
 
 
-<!-- SETTINGS -->
+<!-- =========================
+     SETTINGS
+========================= -->
+
 <section id="settings" class="screen">
 
-  <div class="title">SETTINGS</div>
+  <div class="brand">
 
-  <button id="soundButton" onclick="toggleSound()">
+    <div class="logoIcon">
+      X O
+    </div>
+
+    <div class="brandText">
+
+      <div class="brandName">
+        INNOCENT <span>VINUU</span>™
+      </div>
+
+      <div class="brandSmall">
+        SETTINGS
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="title">
+    SETTINGS
+  </div>
+
+
+  <button
+    id="soundButton"
+    onclick="toggleSound()">
     🔊 SOUND: ON
   </button>
 
-  <button id="vibrationButton" onclick="toggleVibration()">
+
+  <button
+    id="vibrationButton"
+    onclick="toggleVibration()">
     📳 VIBRATION: ON
   </button>
 
-  <button onclick="show('home')">
+
+  <button
+    onclick="show('home')">
     ← BACK
   </button>
 
+
   <div class="about">
-    <strong>INNOCENT VINUU</strong><br>
+
+    <strong>
+      INNOCENT VINUU™
+    </strong>
+
+    <br>
+
     Professional Tic Tac Toe
+
+    <br><br>
+
+    Developer
+
+    <br>
+
+    <strong>
+      INNOCENT VINUU™
+    </strong>
+
+  </div>
+
+
+  <div class="footer">
+
+    <p>
+      © 2026 INNOCENT VINUU™.
+      All Rights Reserved.
+    </p>
+
   </div>
 
 </section>
 
 </div>
 
-<div class="credit">
-Developed by INNOCENT VINUU
-</div>
-
 
 <script>
 
+/* =========================
+   GAME VARIABLES
+========================= */
+
 let cells = [];
+
 let current = "X";
+
 let mode = "computer";
+
 let gameOver = false;
 
 let xScore = 0;
+
 let oScore = 0;
 
 let sound = true;
+
 let vibration = true;
 
 
-/* SCREEN */
+/* =========================
+   SCREEN
+========================= */
 
 function show(id){
 
-  document.querySelectorAll(".screen")
-  .forEach(s => s.classList.remove("active"));
+  document
+    .querySelectorAll(".screen")
+    .forEach(s =>
+      s.classList.remove("active")
+    );
 
-  document.getElementById(id)
-  .classList.add("active");
+  document
+    .getElementById(id)
+    .classList.add("active");
+
+  window.scrollTo(0,0);
 }
 
 
-/* START */
+/* =========================
+   START GAME
+========================= */
 
 function startGame(selectedMode){
 
   mode = selectedMode;
 
   xScore = 0;
+
   oScore = 0;
 
   updateScore();
@@ -325,7 +897,9 @@ function startGame(selectedMode){
 }
 
 
-/* RESET */
+/* =========================
+   RESET
+========================= */
 
 function resetRound(){
 
@@ -336,16 +910,20 @@ function resetRound(){
   ];
 
   current = "X";
+
   gameOver = false;
 
-  document.getElementById("status")
-  .textContent = "X's Turn";
+  document
+    .getElementById("status")
+    .textContent = "X's Turn";
 
   draw();
 }
 
 
-/* DRAW */
+/* =========================
+   DRAW BOARD
+========================= */
 
 function draw(){
 
@@ -368,6 +946,7 @@ function draw(){
       cell.classList.add(
         value.toLowerCase()
       );
+
     }
 
     cell.onclick = () => play(index);
@@ -375,40 +954,57 @@ function draw(){
     board.appendChild(cell);
 
   });
+
 }
 
 
-/* PLAY */
+/* =========================
+   PLAY
+========================= */
 
 function play(index){
 
-  if(gameOver || cells[index]) return;
+  if(
+    gameOver ||
+    cells[index]
+  ) return;
 
   cells[index] = current;
 
   tapSound();
 
-  if(vibration && navigator.vibrate){
+  if(
+    vibration &&
+    navigator.vibrate
+  ){
+
     navigator.vibrate(30);
+
   }
 
   draw();
 
-  const winner = checkWinner();
+  const winner =
+    checkWinner();
 
   if(winner){
 
     gameOver = true;
 
     if(winner === "X"){
+
       xScore++;
+
     }else{
+
       oScore++;
+
     }
 
     updateScore();
 
-    document.getElementById("status")
+    document
+      .getElementById("status")
       .textContent =
       winner + " WINS! 🏆";
 
@@ -419,35 +1015,50 @@ function play(index){
     return;
   }
 
+
   if(!cells.includes("")){
 
     gameOver = true;
 
-    document.getElementById("status")
+    document
+      .getElementById("status")
       .textContent =
       "DRAW! 🤝";
 
     return;
   }
 
-  current =
-    current === "X" ? "O" : "X";
 
-  document.getElementById("status")
+  current =
+    current === "X"
+    ? "O"
+    : "X";
+
+
+  document
+    .getElementById("status")
     .textContent =
     current + "'s Turn";
+
 
   if(
     mode === "computer" &&
     current === "O"
   ){
 
-    setTimeout(computerMove,400);
+    setTimeout(
+      computerMove,
+      400
+    );
+
   }
+
 }
 
 
-/* COMPUTER */
+/* =========================
+   COMPUTER
+========================= */
 
 function computerMove(){
 
@@ -456,10 +1067,15 @@ function computerMove(){
   let empty = [];
 
   cells.forEach((v,i)=>{
-    if(v === "") empty.push(i);
+
+    if(v === "")
+      empty.push(i);
+
   });
 
-  if(empty.length === 0) return;
+
+  if(empty.length === 0)
+    return;
 
 
   /* WIN */
@@ -468,16 +1084,20 @@ function computerMove(){
 
     cells[i] = "O";
 
-    if(checkWinner() === "O"){
+    if(
+      checkWinner() === "O"
+    ){
 
       cells[i] = "";
 
       play(i);
 
       return;
+
     }
 
     cells[i] = "";
+
   }
 
 
@@ -487,7 +1107,9 @@ function computerMove(){
 
     cells[i] = "X";
 
-    if(checkWinner() === "X"){
+    if(
+      checkWinner() === "X"
+    ){
 
       cells[i] = "";
 
@@ -499,14 +1121,17 @@ function computerMove(){
 
       current = "X";
 
-      document.getElementById("status")
+      document
+        .getElementById("status")
         .textContent =
         "X's Turn";
 
       return;
+
     }
 
     cells[i] = "";
+
   }
 
 
@@ -517,6 +1142,7 @@ function computerMove(){
     play(4);
 
     return;
+
   }
 
 
@@ -525,32 +1151,42 @@ function computerMove(){
   const move =
     empty[
       Math.floor(
-        Math.random()*empty.length
+        Math.random() *
+        empty.length
       )
     ];
 
   play(move);
+
 }
 
 
-/* WINNER */
+/* =========================
+   WINNER
+========================= */
 
 function checkWinner(){
 
   const combinations = [
 
     [0,1,2],
+
     [3,4,5],
+
     [6,7,8],
 
     [0,3,6],
+
     [1,4,7],
+
     [2,5,8],
 
     [0,4,8],
+
     [2,4,6]
 
   ];
+
 
   for(let combo of combinations){
 
@@ -563,29 +1199,42 @@ function checkWinner(){
     ){
 
       return cells[a];
+
     }
+
   }
 
   return null;
+
 }
 
 
-/* WIN HIGHLIGHT */
+/* =========================
+   WIN HIGHLIGHT
+========================= */
 
 function highlightWinner(){
 
   const combinations = [
 
     [0,1,2],
+
     [3,4,5],
+
     [6,7,8],
+
     [0,3,6],
+
     [1,4,7],
+
     [2,5,8],
+
     [0,4,8],
+
     [2,4,6]
 
   ];
+
 
   for(let combo of combinations){
 
@@ -598,41 +1247,63 @@ function highlightWinner(){
     ){
 
       const board =
-        document.querySelectorAll(".cell");
+        document.querySelectorAll(
+          ".cell"
+        );
 
-      board[a].classList.add("win");
-      board[b].classList.add("win");
-      board[c].classList.add("win");
+      board[a]
+        .classList
+        .add("win");
+
+      board[b]
+        .classList
+        .add("win");
+
+      board[c]
+        .classList
+        .add("win");
 
       break;
+
     }
+
   }
+
 }
 
 
-/* SCORE */
+/* =========================
+   SCORE
+========================= */
 
 function updateScore(){
 
-  document.getElementById("xScore")
+  document
+    .getElementById("xScore")
     .textContent = xScore;
 
-  document.getElementById("oScore")
+  document
+    .getElementById("oScore")
     .textContent = oScore;
+
 }
 
 
-/* SOUND */
+/* =========================
+   SOUND
+========================= */
 
 function toggleSound(){
 
   sound = !sound;
 
-  document.getElementById("soundButton")
+  document
+    .getElementById("soundButton")
     .textContent =
     sound
     ? "🔊 SOUND: ON"
     : "🔇 SOUND: OFF";
+
 }
 
 
@@ -640,19 +1311,27 @@ function toggleVibration(){
 
   vibration = !vibration;
 
-  document.getElementById("vibrationButton")
+  document
+    .getElementById("vibrationButton")
     .textContent =
     vibration
     ? "📳 VIBRATION: ON"
     : "📴 VIBRATION: OFF";
+
 }
 
 
-/* SIMPLE SOUND ENGINE */
+/* =========================
+   SOUND ENGINE
+========================= */
 
 let audioContext;
 
-function beep(frequency,duration){
+
+function beep(
+  frequency,
+  duration
+){
 
   if(!sound) return;
 
@@ -660,48 +1339,67 @@ function beep(frequency,duration){
 
     audioContext =
       audioContext ||
-      new (
+      new(
         window.AudioContext ||
         window.webkitAudioContext
       )();
 
+
     const oscillator =
-      audioContext.createOscillator();
+      audioContext
+      .createOscillator();
+
 
     const gain =
-      audioContext.createGain();
+      audioContext
+      .createGain();
+
 
     oscillator.frequency.value =
       frequency;
 
-    oscillator.type = "sine";
+    oscillator.type =
+      "sine";
+
 
     gain.gain.setValueAtTime(
       0.08,
       audioContext.currentTime
     );
 
-    gain.gain.exponentialRampToValueAtTime(
-      0.001,
-      audioContext.currentTime + duration
-    );
+
+    gain.gain
+      .exponentialRampToValueAtTime(
+        0.001,
+        audioContext.currentTime +
+        duration
+      );
+
 
     oscillator.connect(gain);
-    gain.connect(audioContext.destination);
+
+    gain.connect(
+      audioContext.destination
+    );
+
 
     oscillator.start();
 
+
     oscillator.stop(
-      audioContext.currentTime + duration
+      audioContext.currentTime +
+      duration
     );
 
   }catch(e){}
+
 }
 
 
 function tapSound(){
 
   beep(520,0.08);
+
 }
 
 
@@ -710,12 +1408,18 @@ function winSound(){
   beep(660,0.12);
 
   setTimeout(()=>{
+
     beep(880,0.15);
+
   },120);
 
+
   setTimeout(()=>{
+
     beep(1040,0.2);
+
   },260);
+
 }
 
 </script>
